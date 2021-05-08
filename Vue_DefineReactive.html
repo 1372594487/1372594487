@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //0414
+        //VUE 响应式原理 2.0
+        //基本响应式实现
+        const data = {
+            name: 'Vue',
+            age: 22,
+        };
+        //变成响应式数据
+        observer(data);
+
+        function observer(target) {
+            if (typeof target !== 'object' || target === null) {
+                return target;
+            }
+            for (let key in target) {
+                defineReactive(target, key, target[key])
+            }
+        }
+
+        function defineReactive(target, key, value) {
+            Object.defineProperty(target, key, {
+                get: function () {
+                    console.log('get');
+                    return name;
+                },
+
+                set: function (newValue) {
+                    if (value !== newValue) {
+                        console.log('set');
+                        name = newValue;
+                        console.log('更新视图')
+                    }
+                }
+            })
+        }
+
+
+        console.log(data.name);
+        data.name = '强透光';
+        console.log(data.name);
+
+
+
+    </script>
+</body>
+
+</html>

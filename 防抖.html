@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn" @click="onClick">btn</button>
+    <script>
+        let btn = document.getElementById("btn");
+        btn.addEventListener('click', onbound(onClick,3000), false);
+
+        function onClick() {
+            console.log('111');
+        }
+
+        // function onbound(fn, delay) {
+        //     let t = null;
+        //     return () => {
+        //         let delay = !t;
+        //         if (t) clearTimeout(t);
+        //             if(delay){
+        //                 fn.apply(this,arguments)
+        //             }
+        //             t = setTimeout(() => {
+        //                 fn.call(this, arguments)
+        //             }, 3000)
+        //     }
+        // }
+
+        function onbound(fn,delay){
+            fn.apply(this,arguments)
+            let begin =0;
+            return()=>{
+                let cur = new Date().getTime();
+                if(cur - begin >= delay){
+                    fn.apply(this,arguments)
+                    begin = cur;
+                }
+            }
+        }
+
+        // function onbound(fn, trigger,timer) {
+        //     let t = null;
+        //     timer = timer||3000
+        //     return () => {
+        //         if (t) clearTimeout(t);
+        //         console.log(t);
+        //         if (trigger) {
+        //             let loadImdia = !t;
+        //             if (loadImdia) {
+        //                 fn.apply(this, arguments)
+        //             }
+        //             t = setTimeout(() => {
+        //                 clearTimeout(t);
+        //                 t = null;
+        //             }, timer)
+        //         } else {
+        //             t = setTimeout(() => {
+        //                 fn.apply(this, arguments)
+        //             }, timer)
+        //         }
+        //     }
+        // }
+        
+        // var observer = new IntersectionObserver(
+        //     function (entries) {
+        //         entries.forEach(function (entry) {
+        //             if (entry.intersectionRatio > 0) {
+        //                 entry.target.src = entry.attributes[1].value;
+        //                 ​observer.unobserve(entry);
+        //             }
+        //         });
+        //     }
+        // );
+    </script>
+</body>
+
+</html>

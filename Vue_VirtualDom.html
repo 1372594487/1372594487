@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue_VirtualDom</title>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.js"></script>
+</head>
+
+<body>
+    <h1>虚拟DOM</h1>
+    <div id="container">
+    </div>
+    <button id="btn">改变</button>
+    <script type="text/javascript" src="./Vue_VirtualDom.js">
+    //虚拟dom好处：他会去比较变化，去计算需要更新的视图，然后在操作DOM进行重新渲染。
+    //第一项数据内容没有变，因此点击改变按钮时不会重新渲染。
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //0413
+        //https://zhuanlan.zhihu.com/p/351750593
+        //观察者模式/发布订阅模式
+
+        // value:
+        // 必需， 要转换的 JavaScript 值（通常为对象或数组）。
+        // replacer:
+        // 可选。用于转
+        // 如果 replacer 为函数，则 JSON.stringify 将调用该函数，并传入每个成员的键和值。使用返回值而不是原始值。如果此函数返回 undefined，则排除成员。根对象的键是一个空字符串：""。
+        // 如果 replacer 是一个数组，则仅转换该数组中具有键值的成员。成员的转换顺序与键在数组中的顺序一样。
+        // space:
+        // 可选，文本添加缩进、空格和换行符，如果 space 是一个数字，则返回值文本在每个级别缩进指定数目的空格，如果 space 大于 10，则文本缩进 10 个空格。space 也可以使用非数字，如：\t。
+        const subject = (function () {
+            const observers = [];
+
+            function subscribe(callback) {
+                console.log('New subscription coming!');
+                observers.push(callback);
+            }
+
+            function notify(params) {
+                for (let i = 0; i < observers.length; i++) {
+                    try {
+                        observers[i] && observers[i](params);
+                    } catch (error) {
+                        console.error(error);
+                        // 避免影响其他observer
+                    }
+                }
+            }
+
+            function fire(params) {
+                console.log('Fire!');
+                notify(params);
+            }
+
+            return {
+                subscribe,
+                fire,
+            }
+        })();
+
+        const observer1 = (args) => {
+            console.log('This is Observer1, Let me process the event');
+            console.log(JSON.stringify(args, null, 4));
+        }
+
+        const observer2 = (args) => {
+            console.log('This is Observer2, Let me process the event');
+            console.log(JSON.stringify(args, null, 4));
+        }
+
+        subject.subscribe(observer1)
+        subject.subscribe(observer2)
+
+        subject.fire({ message: 'hello world' });
+        subject.fire({ value: 2021 });
+    </script>
+</body>
+
+</html>
