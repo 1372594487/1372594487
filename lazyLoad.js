@@ -22,22 +22,26 @@ export default () => {
             let _h = window.innerHeight;
             //页面实际高度
             let totalH = document.body.scrollHeight;
-        }
 
-        if (len > 0) {
-            for (let index = 0; index < lazyArr.length; index++) {
-                const img = lazyArr[index];
-                //相对视口的高度
-                let _oh = img.getBoundingClientRect().top;
-                let tSrc = img.getAttribute('tSrc');
-                if (scrollTop + _h >= scrollTop + _oh && tSrc) {
-                    img.setAttribute('src', tSrc);
-                    img.setAttribute('tSrc', '');
-                    len--;
+            if (len > 0) {
+                for (let index = 0; index < lazyArr.length; index++) {
+                    const img = lazyArr[index];
+                    //相对视口的高度
+                    let _oh = img.getBoundingClientRect().top;
+                    let tSrc = img.getAttribute('tSrc');
+                    if (scrollTop + _h >= scrollTop + _oh && tSrc) {
+                        img.setAttribute('src', tSrc);
+                        img.setAttribute('tSrc', '');
+                        len--;
+                    }
+
                 }
-
             }
         }
+        //执行一次
+        load();
+
+
 
         //方式2 使用 IntersectionObserver构造函数
         // function query(selector) {
