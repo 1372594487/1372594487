@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn"></button>
+    <script>
+        // const data = {tag:'data'}
+
+        // function fn(){
+        //     console.log(this.tag);
+        //     return function(){
+        //         console.log(this.tag);
+        //     }
+        // }
+        // fn.call(data);
+
+        // new Promise(resolve =>{
+        //     console.log("start");
+        //     resolve();
+        // }).then(()=>{
+        //     return new Promise(resolve =>resolve())
+        //     .then(()=>console.log("promise1"))
+        //     .then(()=>console.log("promise2"))
+        //     .then(()=>console.log("promise3"))
+        // })
+        // .then(()=>console.log("end"))
+
+        // const data1 ={tag:'data1'};
+        // const data2 ={tag:'data2'};
+        // function fn(){
+        //     console.log(this.tag);
+        //     const out =()=>{
+        //         console.log(this.tag);
+        //     }
+        //     out.call(data2)
+        // }
+        // fn.call(data1);
+
+
+        // console.log([].__proto__ == Array.prototype);
+        // console.log(Function.__proto__==Object.prototype);
+        // console.log(Object.__proto__==Object.prototype);
+
+        // async function fn(){
+        //     console.log('start');
+        //     await Promise.resolve()
+        //     console.log('end');
+        // }
+        // fn();
+        // new Promise(resolve=>{
+        //     console.log('promise1');
+        //     resolve()
+        //     Promise.resolve().then(()=>{console.log('promise2');})
+        // }).then(()=>{console.log("promise3");})
+
+        // let a = null 
+        // function fn(){
+        //     let a =1;
+        //     void(function(){
+        //         var a =2 ;
+        //         console.log(a);
+        //     })()
+        //     console.log(a);
+        // }
+        // fn()
+
+
+        //     const data = {}
+        // console.log(Object.create(data)===data);
+        // console.log(Object.create(data).__proto__===data.prototype);
+        // console.log(Object.create(data)===data.prototype);
+        // console.log(Object.create(data).__proto__===data);
+
+        // function fn() {}
+
+        // console.log(fn.bind(null) === fn, fn.bind(window) === fn);
+
+        // console.log('start');
+        // new Promise(resolve => {
+        //     console.log("promise1");
+        //     setTimeout(() => {
+        //         console.log("setTimeout1");
+        //     })
+        //     Promise.resolve().then(() => {
+        //             console.log('promise2');
+        //             resolve()
+        //         })
+        //         .then(() => {
+        //             console.log('promise3');
+        //             new Promise((resolve) => {
+        //                     resolve();
+        //                     console.log("promise5");
+        //                 })
+        //                 .then(() => {
+        //                     console.log('promise6');
+        //                     return Promise.resolve()
+        //                 })
+        //                 .then(() => {
+        //                     console.log('end');
+        //                 })
+        //         })
+        //         .then(() => console.log("promise4"))
+        // })
+
+        // function fn(){
+        //     Promise.resolve().then(fn)
+        // }
+        // fn()
+        //造成卡死，卡死原因...
+
+
+        // console.log(Object.create({}).prototype);
+
+
+        // let div = document.getElementById('btn')
+        // div.addEventListener('click',()=>{
+        //     console.log("1");
+        //     Promise.resolve().then(()=>{
+        //         console.log("p1");
+        //     })
+        // })
+
+        // div.addEventListener('click',()=>{
+        //     console.log("2");
+        //     Promise.resolve().then(()=>{
+        //         console.log("p2");
+        //     })
+        // })
+        // div.click();
+
+
+        // const list = [1,2]
+        // list.push(...list)
+        // console.log(list);
+
+        // const data = {
+        //     tag: 'tag'
+        // }
+
+        // function fn() {
+        //     console.log(this.tag,this);
+
+        //     function fn1() {
+        //         console.log(this.tag,this);
+        //         const fn2 = () => {
+        //             console.log(this.tag);
+        //         }
+        //         fn2()
+        //     }
+        //     fn1();
+
+        // }
+        // fn.call(data)
+
+        // function fn(){
+        //     console.log(this.tag);
+        //     setTimeout(()=>{
+        //         console.log(this.tag);
+        //     })
+        // }
+        // const data1 = {tag:'data1',fn}
+        // const data2  ={tag:'data2',fn:data1.fn}
+        // data2.fn()
+
+
+        console.log(Function.prototype===Object.__proto__);
+    </script>
+</body>
+
+</html>
