@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="ddiv">123123</div>
+    <script>
+        let propertyName = "html";
+        class CustomHTMLElement {
+            constructor(element) {
+                this.element = element;
+            }
+
+            get[propertyName]() {
+                return this.element.innerHTML;
+            }
+            // set[propertyName](value) {
+            //     this.element.innerHTML = value;
+            // }
+        }
+        let div = document.getElementsByClassName("ddiv")[0];
+        var dom = new CustomHTMLElement(div);
+        console.log(dom.html);
+        dom.html="123123123"
+    </script>
+</body>
+
+</html>
