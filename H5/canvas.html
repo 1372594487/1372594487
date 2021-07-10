@@ -9,20 +9,26 @@
 </head>
 
 <body>
-    <canvas id="tutorial" width="300" height="300"></canvas>
+    <canvas id="solar" width="600" height="600"></canvas>
     <script type="text/javascript">
+        let canvas = document.querySelector("#solar");
+        ctx = canvas.getContext("2d");
+
         function draw() {
-            var canvas = document.getElementById('tutorial');
-            if (!canvas.getContext) return;
-            var ctx = canvas.getContext("2d");
-            for (var i = 0; i < 6; i++) {
-                for (var j = 0; j < 6; j++) {
-                    ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ',' +
-                        Math.floor(255 - 42.5 * j) + ',0)';
-                    ctx.fillRect(j * 50, i * 50, 50, 50);
-                }
-            }
+            ctx.translate(150, 150);
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(255,255,0,0.5)";
+            ctx.arc(0, 0, 100, 0, 2 * Math.PI)
+            ctx.stroke()
+
+            //绘制月球轨道
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(0,0,0,1)";
+            ctx.arc(0, 0, 40, 0, 2 * Math.PI);
+            ctx.stroke();
         }
+
+        
         draw();
     </script>
 </body>
