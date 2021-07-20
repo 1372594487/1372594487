@@ -59,3 +59,55 @@ promise.then(function(contents){
 })
 // 在这段代码中，一个完成处理程序被调用时向同一个Promise添加了另一个完成处理程序，此时这个Promise已经完成，所以新的处理程序会被添加到任务队列中，当前面的任务完成后其才被调用。这对拒绝处理程序也同样适用。
 //每次调用then()方法或catch()方法都会创建一个新任务，当Promise被解决(resolved)时执行。这些任务最终会被加入到一个为Promise量身定制的独立队列中，这个任务队列的具体细节对于理解如何使用Promise而言不重要，通常以只要理解任务队列是如何运作的就行。
+
+// Promise.all()方法
+
+// Promise.all()方法只接受一个参数并返回一个Promise，该参数是一个含有多个受监视Promise的可迭代对象(例如一个数组),只有当可迭代对象中所有Promise都被解决后返回的Promise才会被解决，只有当可迭代对象中所有Promise被完成后返回的Promise才会被完成。
+let p1 = new Promise(function(resolve,reject){
+    resolve(42);
+});
+let p2 = new Promise(function(resolve,reject){
+    resolve(43);
+});
+let p3 = new Promise(function(resolve,reject){
+    resolve(44);
+});
+let p4 = promise.all([p1,p2,p3]);
+
+p4.then(function(value){
+    console.log(Array.isArray(value));      //true;
+    console.log(value[0]);      //42
+    console.log(value[1]);      //43
+    console.log(value[2]);      //44
+})
+
+// 每个Promise解决时都传入一个数字，调用Promise.all()方法创建Promise p4,最终当Promise p1、p2和p3都处于完成状态后p4才被完成。传入p4完成处理程序的结果是一个包含每个解决值(42,43,44)的数组，这些值按照传入参数数组中Promise的顺序存储，所以可以根据每个结果来匹配对应的Promise。
+// 所有传入Promise.all()方法的Promise只要有一个被拒绝，那么返回的Promise没等所有的Promise都完成就立即被拒绝。
+
+let p1 = new Promise(function(resolve,reject){
+    resolve(42);
+});
+let p2 = new Promise(function(resolve,reject){
+    reject(43);
+});
+let p3 = new Promise(function(resolve,reject){
+    resolve(44);
+});
+
+let p4 = promise.all([p1,p2,p3]);
+p4.catch(function(value){
+    console.log(Array.isArray(value));      //false;
+    console.log(value);     //43
+})
+
+//串联Promise
+// 每次调用then()方法或catch()方法时实际上创建并返回了另一个Promise，只有当第一个Promise完成或被拒绝后，第二个才会被解决。
+let p1 = new Promise(function(resolve,reject){
+    resolve(42);
+})
+
+p1.then(function(value){
+    console.log(value);
+}).then(function(){
+    console.log("Finished");
+})
