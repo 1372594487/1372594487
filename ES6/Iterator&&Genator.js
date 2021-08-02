@@ -95,24 +95,24 @@ console.log(iterator.next());       //"{value: underfined, done: true"
 //生成器对象方法
 //由于生成器本身就是函数,因而可以将它们添加到对象中。例如，在ES5风格的对象字面量中，可以通过函数表达式来创建生成器，就像这样：
 let o = {
-    createIterator:function*(items){
-        for(let i=0;i<items.length;i++){
+    createIterator: function* (items) {
+        for (let i = 0; i < items.length; i++) {
             yield items[i];
         }
     }
 }
 
-let iterator = o.createIterator([1,2,3]);
+let iterator = o.createIterator([1, 2, 3]);
 //也可以用ES6的函数方法的简写方式创建生成器，只需在函数名前添加一个星号(*)
 let o = {
-    *createIterator(items){
-        for(let i=0;i<items.length;i++){
+    *createIterator(items) {
+        for (let i = 0; i < items.length; i++) {
             yield items[i];
         }
     }
 }
 
-let iterator = o.createIterator([1,2,3]);
+let iterator = o.createIterator([1, 2, 3]);
 // 这些示例使用了不同与之前的语法，但它们的功能实际上是等价的。在简写版本中，由于不使用function关键字来定义createIterator()方法，因此尽管可以在星号和方法名之间留白，但我们还是将星号紧贴在方法名之前。
 
 //小结
@@ -125,3 +125,38 @@ let iterator = o.createIterator([1,2,3]);
 
 // 借助生成器委托这个新特性，便可重用已有生成器来创建新的生成器，从而进一步封装更复杂的迭代器行为。新语法使用yield *来标识生成的值，新迭代器的返回值便可取自己有的多个迭代器。
 // 在生成器和迭代器的所有应用场景中，最有趣且最令人兴奋的可能是用来创建更简洁的异步代码。这种方式无须在所有地方定义回调函数，其代码看起来像是同步代码，但实际上使用了yield生成的特性来等待异步操作最终完成。
+
+//创建一个可迭代对象
+const myIterable = {};
+myIterable[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+
+for (let value of myIterable) {
+    console.log(value);
+}
+// 1
+// 2
+// 3
+
+//or
+console.log([...myIterable]); // [1, 2, 3]
+
+//
+const myIterable = {
+    name: 'aya',
+    age: 23,
+    weight: 100,
+    height: 165,
+};
+myIterable[Symbol.iterator] = function* () {
+    for (key of Object.keys(this)) {
+        yield this[key];
+    }
+};
+
+for (let value of myIterable) {
+    console.log(value);
+}

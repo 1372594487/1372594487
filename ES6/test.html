@@ -29,18 +29,73 @@
         console.log(dom.html);
         dom.html="123123123"
     </script> -->
-    <script src="./promise2.js"></script>
-    <!-- <script>
-        let p1 = new Promise(function (resolve, reject) {
-            resolve(42);
-        })
+    <script>
+        // const myIterable = {
+        //     name:'aya',
+        //     age:23,
+        //     weight:100,
+        //     height:165,
+        // };
+        // myIterable[Symbol.iterator] = function* () {
+        //     for(key of Object.keys(this)){
+        //         yield this[key]
+        //     }
+        // };
 
-        p1.then(function (value) {
+        // for (let value of myIterable) {
+        //     console.log(value);
+        // }
+        // 1
+        // 2
+        // 3
+
+        //or
+        // console.log([...myIterable]); // [1, 2, 3]
+
+        function MyObject() {}
+        MyObject.prototype = new Object();
+        Object.prototype[Symbol.iterator] = function* () {
+            for (key of Object.keys(this)) {
+                yield this[key]
+            }
+        };
+        var mitor = new MyObject();
+        mitor.name = 'aya';
+        mitor.age = 23;
+        mitor.weight = 100;
+        mitor.height = 165;
+        // console.log(mitor.__proto__===MyObject.prototype);
+        // console.log(mitor.__proto__.__proto__===Function.prototype);
+        // console.log(MyObject.prototype.__proto__===Function.prototype);
+        console.log(MyObject.prototype.__proto__ === Object.prototype);
+        console.log(Object.prototype);
+        console.log(MyObject.__proto__ === Function.prototype);
+        console.log(mitor);
+
+        var obj = new Object();
+        obj.name = "mo"
+        console.log(obj.__proto__);
+
+        var objl = {
+            name: 'asd',
+            age: 123,
+        }
+        console.log(objl.__proto__);
+        for (let value of mitor) {
             console.log(value);
-        }).then(function () {
-            console.log("Finished");
-        })
-    </script> -->
+        }
+
+        function Animal() {
+            this.age = 123;
+        };
+        Animal.prototype[Symbol.iterator] = function* () {
+            for (key of Object.keys(this)) {
+                yield this[key]
+            }
+        };
+        console.log(Animal.prototype)
+        console.log(Animal.__proto__ === Function.prototype);
+    </script>
 </body>
 
 </html>

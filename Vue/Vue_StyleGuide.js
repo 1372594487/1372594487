@@ -4,12 +4,12 @@
 这样做可以避免跟现有以及未来的HTML元素相冲突，因为所有的HTML元素名称都是单个单词的。
 */
 Vue.component('todo-item', {
-    //...
+  //...
 });
 
 export default {
-    name: 'TodoItem',
-    //
+  name: 'TodoItem',
+  //
 }
 
 //#组件数据
@@ -26,33 +26,33 @@ export default {
 // 我们可能希望重用组件，允许用户维护多个列表（比如分为购物、心愿单、日常事务等）。这时会产生问题，因为每一个组件的实例都引用了相同数据对象，更改其中一个列表的标题就会改变其他每一个列表的标题。增删改一个待办事项的时候也是如此。
 // 为了做到这一点每个实例必须生成一个独立的数据对象。JavaScript中，在一个函数中返回这个对象就可以
 
-data:function(){
-    return{
-        listTitle:'',
-        todos:[]
-    }
+data: function() {
+  return {
+    listTitle: '',
+    todos: []
+  }
 }
 
 Vue.component('some-comp', {
-    data: function () {
-        return {
-            foo: 'bar'
-        }
+  data: function () {
+    return {
+      foo: 'bar'
     }
+  }
 })
 // 在一个vue文件中使用
 export default {
-    data() {
-        return {
-            foo: 'bar'
-        }
+  data() {
+    return {
+      foo: 'bar'
     }
+  }
 }
 // Vue的根实例上直接使用对象是可以的
 new Vue({
-    data: {
-        foo: 'bar'
-    }
+  data: {
+    foo: 'bar'
+  }
 })
 
 //#Prop定义
@@ -116,9 +116,9 @@ v-for="user in users" v-if="shouldShowUsers"
 
 // 将会经过如下运算：
 this.users.map(function (user) {
-    if (user.isActive) {
-        return user.name
-    }
+  if (user.isActive) {
+    return user.name
+  }
 })
 
 // 因此哪怕我们只渲染出一小部分用户的元素，也得在每次重渲染的时候遍历整个列表，不论活跃用户是否发生了变化。
@@ -220,27 +220,27 @@ this.users.map(function (user) {
 // 使用模块作用域保持不允许外部访问的函数的私有性。如果无法做到这一点，就始终为插件、混入等不考虑作为对外公共API的自定义私有property使用$_前缀，并附带一个命名空间以回避和其他作者的冲突（比如 $_yourPluginName_）
 
 var myGreatMixin = {
-    // ...
-    methods: {
-        $_myGreatMixin_update: function () {
-            // ...
-        }
+  // ...
+  methods: {
+    $_myGreatMixin_update: function () {
+      // ...
     }
+  }
 }
 
 // 甚至更好！
 var myGreatMixin = {
-    // ...
-    methods: {
-        publicMethod() {
-            // ...
-            myPrivateFunction()
-        }
+  // ...
+  methods: {
+    publicMethod() {
+      // ...
+      myPrivateFunction()
     }
+  }
 }
 
 function myPrivateFunction() {
-    // ...
+  // ...
 }
 
 export default myGreatMixin
